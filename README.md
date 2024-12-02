@@ -62,6 +62,10 @@ To simulate load and verify HPA functionality, use stress or apache-bench to gen
      ```bash
       kubectl port-forward svc/python-app-svc 80:80
      ```
+     URL - http://localhost:80
+
+   ![k8 1](https://github.com/user-attachments/assets/ecc9a6db-d002-436d-9bc5-d79279d0904b)
+
 
 **Note:** In a typical Kubernetes setup on a cloud or a remote server, NodePort would expose the service on a port (like 30090) that can be accessed externally. However, in my local Minikube setup on my laptop, the NodePort (30090) does not work when trying to access via the Minikube IP or localhost. The primary reasons for this behavior are:
 
@@ -77,7 +81,10 @@ To overcome this, we are using Port Forwarding, which allows us to forward the s
     ```bash
       ngrok http 80
     ```
-    Access the application using the provided public URL.
+    Access the application using the provided public URL. - https://5410-110-235-219-10.ngrok-free.app/
+
+![k8 2](https://github.com/user-attachments/assets/13f620cc-d637-4d4c-b6d1-b0563ea24060)
+
 
 8. **Enable Metrics Server for HPA**
 Install Metrics Server on Minikube
