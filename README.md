@@ -113,3 +113,34 @@ spec:
     - --kubelet-insecure-tls
     - --kubelet-preferred-address-types=InternalIP
 ```
+
+**Cloud-based Load Balancing Options**
+After completing the local setup with Minikube and testing the application, we can scale our deployment to a cloud environment like AWS. There are two common ways to expose our Kubernetes application in the cloud:
+
+1. NodePort with AWS ELB
+2. LoadBalancer Service with AWS ALB
+   
+Both approaches allow us to manage and distribute traffic to our Kubernetes application, but they differ in how they handle traffic distribution, scaling, and management.
+
+**1. NodePort with AWS ELB**
+In this setup, the Kubernetes service is exposed using a NodePort-type service. This exposes each of the Kubernetes worker nodes on a specific port like 300090, typically a high-range port, through which traffic can be routed to the pods. AWS Elastic Load Balancer (ELB) is used to distribute traffic across the worker nodes. ELB is configured to forward traffic to the NodePort on each node, ensuring that traffic reaches the application, even as the Kubernetes pods scale.
+
+Flow:
+
+1. The NodePort service exposes the application on a fixed port across all nodes like 30090.
+2. AWS ELB listens for incoming requests and routes them to the appropriate NodePort on the Kubernetes nodes.
+3. This setup requires additional configuration, including managing health checks and traffic routing for each individual node.
+
+This approach is suitable for scenarios where we want basic load balancing and can manage our nodes manually. However, it’s less flexible and harder to scale compared to a more integrated solution like the LoadBalancer service.
+
+**2. LoadBalancer Service with AWS ALB**
+The LoadBalancer service in Kubernetes automatically provisions an AWS Application Load Balancer (ALB) to distribute traffic to the pods running in the Kubernetes cluster. The ALB listens for incoming traffic on a public IP and routes the traffic to the corresponding service in Kubernetes. Kubernetes integrates with the ALB to ensure that traffic is balanced across all available pods.
+
+Flow:
+
+1. The LoadBalancer service in Kubernetes automatically provisions an AWS ALB.
+2. The ALB distributes traffic across multiple availability zones (AZs), ensuring high availability and fault tolerance.
+3. The ALB monitors pod health and ensures that only healthy pods receive traffic.
+4. This setup integrates directly with Kubernetes and automatically scales based on traffic load.
+
+This is the preferred choice for production-grade, large-scale deployments as it provides better scalability, automated traffic distribution, SSL termination, and integrated health checks, without requiring manual management of nodes or ports.
