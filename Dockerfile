@@ -18,7 +18,10 @@ FROM python:3.9-slim
 # Set the working directory
 WORKDIR /app
 
-# Copy only the necessary files from the build stage
+# Copy the dependencies from the build stage
+COPY --from=build /usr/local/lib/python3.9/site-packages /usr/local/lib/python3.9/site-packages
+
+# Copy the application code
 COPY --from=build /app /app
 
 # Expose the port the app will run on
