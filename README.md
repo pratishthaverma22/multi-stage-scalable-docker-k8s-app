@@ -104,8 +104,6 @@ kubectl edit deployment metrics-server -n kube-system
 Add the following arguments under the args section of the metrics-server container:
 
 ```bash
-yaml
-Copy code
 spec:
   containers:
   - name: metrics-server
