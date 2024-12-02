@@ -125,7 +125,7 @@ Both approaches allow us to manage and distribute traffic to our Kubernetes appl
 
 **1. NodePort with AWS ELB**
 
-In this setup, the Kubernetes service is exposed using a NodePort-type service. This exposes each of the Kubernetes worker nodes on a specific port like 30090, typically a high-range port, through which traffic can be routed to the pods. AWS Elastic Load Balancer (ELB) is used to distribute traffic across the worker nodes. ELB is configured to forward traffic to the NodePort on each node, ensuring that traffic reaches the application, even as the Kubernetes pods scale.
+In this setup, the Kubernetes service is exposed using a NodePort-type service. This exposes each of the Kubernetes worker nodes on a specific port like 30090, generally ranging from 30000 to 32767, through which traffic can be routed to the pods. AWS Elastic Load Balancer (ELB) is used to distribute traffic across the worker nodes. ELB is configured to forward traffic to the NodePort on each node, ensuring that traffic reaches the application, even as the Kubernetes pods scale.
 
 Flow:
 
