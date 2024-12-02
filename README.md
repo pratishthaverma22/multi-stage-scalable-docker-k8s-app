@@ -115,6 +115,7 @@ spec:
 ```
 
 **Cloud-based Load Balancing Options**
+
 After completing the local setup with Minikube and testing the application, we can scale our deployment to a cloud environment like AWS. There are two common ways to expose our Kubernetes application in the cloud:
 
 1. NodePort with AWS ELB
@@ -123,7 +124,8 @@ After completing the local setup with Minikube and testing the application, we c
 Both approaches allow us to manage and distribute traffic to our Kubernetes application, but they differ in how they handle traffic distribution, scaling, and management.
 
 **1. NodePort with AWS ELB**
-In this setup, the Kubernetes service is exposed using a NodePort-type service. This exposes each of the Kubernetes worker nodes on a specific port like 300090, typically a high-range port, through which traffic can be routed to the pods. AWS Elastic Load Balancer (ELB) is used to distribute traffic across the worker nodes. ELB is configured to forward traffic to the NodePort on each node, ensuring that traffic reaches the application, even as the Kubernetes pods scale.
+
+In this setup, the Kubernetes service is exposed using a NodePort-type service. This exposes each of the Kubernetes worker nodes on a specific port like 30090, typically a high-range port, through which traffic can be routed to the pods. AWS Elastic Load Balancer (ELB) is used to distribute traffic across the worker nodes. ELB is configured to forward traffic to the NodePort on each node, ensuring that traffic reaches the application, even as the Kubernetes pods scale.
 
 Flow:
 
@@ -134,6 +136,7 @@ Flow:
 This approach is suitable for scenarios where we want basic load balancing and can manage our nodes manually. However, it’s less flexible and harder to scale compared to a more integrated solution like the LoadBalancer service.
 
 **2. LoadBalancer Service with AWS ALB**
+
 The LoadBalancer service in Kubernetes automatically provisions an AWS Application Load Balancer (ALB) to distribute traffic to the pods running in the Kubernetes cluster. The ALB listens for incoming traffic on a public IP and routes the traffic to the corresponding service in Kubernetes. Kubernetes integrates with the ALB to ensure that traffic is balanced across all available pods.
 
 Flow:
