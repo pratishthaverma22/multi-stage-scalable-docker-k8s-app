@@ -72,13 +72,12 @@ To simulate load and verify HPA functionality, use stress or apache-bench to gen
 To overcome this, we are using Port Forwarding, which allows us to forward the service’s port directly to the local machine, making it accessible on localhost:80. This approach solves the issue of direct NodePort exposure on local setups with Minikube and ensures that we can still access the application locally in the browser.
 
   **Expose the Service Using ngrok**
-     To expose the application externally, use ngrok:
-      Install ngrok.
-      Run the following command to expose the service:
-      ```bash
+  To expose the application externally, use ngrok:
+    Install ngrok and run the following command to expose the service:
+    ```bash
       ngrok http 80
-      ```
-      Access the application using the provided public URL.
+    ```
+    Access the application using the provided public URL.
 
 8. **Enable Metrics Server for HPA**
 Install Metrics Server on Minikube
